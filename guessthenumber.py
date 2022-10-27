@@ -1,25 +1,36 @@
 import random
 
-user_attempts = 0
+user_attempts_easy = 10
+user_attempts_hard = 5
 
-def pick_random_num():
-  random_num = random.randint(1, 100)
-  return random_num
+#Create a function for difficulty.
+def set_difficulty():
+  easy_or_hard = input('Choose a difficulty. Type "easy" or "hard": ')
+  if easy_or_hard == 'easy':
+    return user_attempts_easy
+  elif easy_or_hard == 'hard':
+    return user_attempts_hard
 
+#Function to check the users guess.
+def check_user_guess(user_guess, random_num):
+  if user_guess > random_num:
+    print('Too high.')
+  elif user_guess < random_num:
+    print('Too low.')
+  else:
+    print(f'You got it! The answer was {random_num}.')
+
+#Choosing a random number between 1 and 100.
+random_num = random.randint(1, 100)
+
+#Welcome messages.
 print("Welcome to the number guessing game!")
 print("I'm thinking of a number between 1 and 100.")
-print(f"Pssst, cheater! The correct answer is {pick_random_num()}.")
+print(f"Pssst, cheater! The correct answer is {random_num}.")
 
-easy_or_hard = input('Choose a difficulty. Type "easy" or "hard": ')
-if easy_or_hard == 'easy' or easy_or_hard == 'Easy':
-  #Give the user 10 attempts
-  user_attempts = 10
-elif easy_or_hard == 'hard' or easy_or_hard == 'Hard':
-  #Give the user 5 attempts
-  user_attempts = 5
-else:
-  print('Invalid input.')
+#Choose difficulty.
+tries_remaining = set_difficulty()
+print(f'You have {tries_remaining} attempts remaining to guess the number.')
 
-def easy_difficulty():
-  while user_attempts > 0:
-    user_guess = input("Make a guess: ")
+#User guess.
+user_guess = int(input("Make a guess: "))
